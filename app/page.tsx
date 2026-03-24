@@ -134,7 +134,7 @@ export default function Home() {
               color: "#e5e2e1",
             }}
           >
-            Hebrew Font Temple
+            בית מקדש הפונט העברי
           </span>
           <span
             style={{
@@ -144,7 +144,7 @@ export default function Home() {
               color: "#99907c",
             }}
           >
-            Est. 2024
+            נוסד 2024
           </span>
         </header>
 
@@ -420,7 +420,7 @@ export default function Home() {
               fontWeight: 500,
             }}
           >
-            Designed &amp; Built by{" "}
+            עיצוב ופיתוח:{" "}
             <span style={{ color: "#99907c" }}>אורי גליקמן</span>
           </p>
         </footer>

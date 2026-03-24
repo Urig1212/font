@@ -71,7 +71,7 @@ export default function ChroniclesPage() {
       {/* ═══ FIXED HEADER ═══ */}
       <header style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, height: "56px", background: "#0e0e0e", borderBottom: "1px solid rgba(242,202,80,0.08)", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 1.25rem" }}>
         <Link href="/" style={{ fontWeight: 900, fontSize: "1.4rem", color: "#f2ca50", textDecoration: "none" }}>אֶלֶף</Link>
-        <span style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.2em", color: "#4d4635", textTransform: "uppercase" }}>THE CHRONICLES</span>
+        <span style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.2em", color: "#4d4635", textTransform: "uppercase" }}>דברי הימים</span>
       </header>
 
       {/* Background glyphs */}
@@ -142,7 +142,7 @@ function DesignerCard({ designer: d, index: i }: { designer: typeof designers[0]
       <div style={{ position: "relative", zIndex: 1, maxWidth: "560px" }}>
         {/* Archive number */}
         <p style={{ fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.22em", color: "#f2ca50", marginBottom: "0.4rem", textTransform: "uppercase" }}>
-          Archive No. {d.number}
+          ארכיון מס׳ {d.number}
         </p>
 
         {/* Font name */}

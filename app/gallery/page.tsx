@@ -103,7 +103,7 @@ export default function GalleryPage() {
       {/* ═══ FIXED HEADER ═══ */}
       <header style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, height: "56px", background: "#0e0e0e", borderBottom: "1px solid rgba(242,202,80,0.08)", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 1.25rem" }}>
         <Link href="/" style={{ fontWeight: 900, fontSize: "1.4rem", color: "#f2ca50", letterSpacing: "-0.02em", textDecoration: "none" }}>אֶלֶף</Link>
-        <span style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.2em", color: "#4d4635", textTransform: "uppercase" }}>THE GALLERY</span>
+        <span style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.2em", color: "#4d4635", textTransform: "uppercase" }}>היכל הפונטים</span>
       </header>
 
       {/* ═══ HERO ═══ */}
@@ -230,7 +230,7 @@ function LetterTile({ letter }: { letter: string }) {
       style={{ aspectRatio: "1", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: hover ? "#f2ca50" : "#1c1b1b", cursor: "pointer", transition: "background 0.2s", maxHeight: "130px" }}
     >
       <span style={{ fontSize: "clamp(2rem,6vw,4rem)", fontWeight: 900, color: hover ? "#1a1200" : "#e5e2e1", fontFamily: "'Space Grotesk',sans-serif", transition: "color 0.2s" }}>{letter}</span>
-      <span style={{ fontSize: "0.52rem", letterSpacing: "0.18em", fontWeight: 700, color: hover ? "#1a1200" : "#4d4635", marginTop: "0.3rem", transition: "color 0.2s" }}>GLYPH</span>
+      <span style={{ fontSize: "0.52rem", letterSpacing: "0.18em", fontWeight: 700, color: hover ? "#1a1200" : "#4d4635", marginTop: "0.3rem", transition: "color 0.2s" }}>אות</span>
     </div>
   );
 }

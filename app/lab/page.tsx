@@ -4,10 +4,10 @@ import { useState } from "react";
 import BottomNav from "../components/BottomNav";
 
 const fontVariants = [
-  { name: "Frank-Rühl", hebrewName: "פרנק-ריהל", letter: "א", style: { fontWeight: 400 } },
-  { name: "Hadassah", hebrewName: "הדסה", letter: "ה", style: { fontWeight: 300, fontStyle: "italic" as const } },
-  { name: "Narkiss Block", hebrewName: "נרקיס", letter: "נ", style: { fontWeight: 900, letterSpacing: "0.05em" } },
-  { name: "David", hebrewName: "דוד", letter: "ד", style: { fontWeight: 500 } },
+  { name: "פרנק-ריהל", sub: "קלאסי · 1908", letter: "א", style: { fontWeight: 400 } },
+  { name: "הדסה", sub: "עדין · 1958", letter: "ה", style: { fontWeight: 300, fontStyle: "italic" as const } },
+  { name: "נרקיס בלוק", sub: "ישראלי · 1968", letter: "נ", style: { fontWeight: 900, letterSpacing: "0.05em" } },
+  { name: "דוד", sub: "אלגנטי · 1954", letter: "ד", style: { fontWeight: 500 } },
 ];
 
 const S = {
@@ -65,7 +65,7 @@ export default function LabPage() {
       <header style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, height: "56px", background: "#0e0e0e", borderBottom: "1px solid rgba(242,202,80,0.08)", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 1.25rem" }}>
         <span style={{ fontWeight: 900, fontSize: "1.4rem", color: "#f2ca50", letterSpacing: "-0.02em" }}>המעבדה</span>
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-          <span style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.2em", color: "#4d4635", textTransform: "uppercase" }}>THE FORGE</span>
+          <span style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.2em", color: "#4d4635", textTransform: "uppercase" }}>נפחיית הפונטים</span>
           <button
             style={{ background: "linear-gradient(135deg,#f2ca50,#d4af37)", color: "#1a1200", border: "none", padding: "0.4rem 1rem", fontSize: "0.7rem", fontWeight: 800, letterSpacing: "0.12em", cursor: "pointer", display: "flex", alignItems: "center", gap: "0.4rem" }}
           >
@@ -247,8 +247,8 @@ export default function LabPage() {
                   {v.letter}
                 </span>
                 <div style={{ textAlign: "right" }}>
-                  <p style={{ fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.12em", color: selectedFont === i ? "#f2ca50" : "#4d4635", marginBottom: "0.2rem", textTransform: "uppercase" }}>{v.name}</p>
-                  <p style={{ fontSize: "0.9rem", fontWeight: 800, color: selectedFont === i ? "#e5e2e1" : "#d0c5af" }}>{v.hebrewName}</p>
+                  <p style={{ fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.08em", color: selectedFont === i ? "#f2ca50" : "#4d4635", marginBottom: "0.2rem" }}>{v.sub}</p>
+                  <p style={{ fontSize: "0.9rem", fontWeight: 800, color: selectedFont === i ? "#e5e2e1" : "#d0c5af" }}>{v.name}</p>
                 </div>
               </button>
             ))}
@@ -258,12 +258,12 @@ export default function LabPage() {
               <p style={{ fontSize: "0.58rem", color: "#4d4635", letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 700, marginBottom: "0.8rem" }}>פרמטרים פעילים</p>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.6rem" }}>
                 {[
-                  ["font-weight", weight],
-                  ["letter-spacing", `${spacing}px`],
-                  ["skew", `${slant}°`],
-                  ["scale-x", `${scale}%`],
-                  ["stroke", `${strokeMod}%`],
-                  ["warp", warp],
+                  ["משקל", weight],
+                  ["ריווח", `${spacing}px`],
+                  ["נטייה", `${slant}°`],
+                  ["קנ״מ", `${scale}%`],
+                  ["קו", `${strokeMod}%`],
+                  ["עיקול", warp === "linear" ? "ליניארי" : "אורגני"],
                 ].map(([k, v]) => (
                   <div key={k as string}>
                     <div style={{ fontSize: "0.52rem", color: "#4d4635", letterSpacing: "0.12em" }}>{k as string}</div>

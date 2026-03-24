@@ -45,7 +45,7 @@ export default function SanctumPage() {
       {/* ═══ HEADER ═══ */}
       <header style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, height: "56px", background: "#0e0e0e", borderBottom: "1px solid rgba(242,202,80,0.08)", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 1.25rem" }}>
         <Link href="/" style={{ fontWeight: 900, fontSize: "1.4rem", color: "#f2ca50", textDecoration: "none" }}>אֶלֶף</Link>
-        <span style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.2em", color: "#4d4635", textTransform: "uppercase" }}>INNER SANCTUM</span>
+        <span style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.2em", color: "#4d4635", textTransform: "uppercase" }}>קדש הקדשים</span>
         <button onClick={() => setShowInfo(!showInfo)} style={{ background: "transparent", border: "none", cursor: "pointer", color: showInfo ? "#f2ca50" : "#4d4635", padding: "0.4rem" }}>
           <span className="material-symbols-outlined" style={{ direction: "ltr", fontSize: "20px" }}>info</span>
         </button>
@@ -109,7 +109,7 @@ export default function SanctumPage() {
 
         {/* Stats row */}
         <div style={{ display: "flex", gap: "2rem", marginTop: "0.75rem", paddingBottom: "0.75rem" }}>
-          {[["ratio", meta.ratio], ["skew", meta.skew], ["weight", weight], ["width", `${width}%`]].map(([k, v]) => (
+          {[["יחס", meta.ratio], ["סטייה", meta.skew], ["משקל", weight], ["רוחב", `${width}%`]].map(([k, v]) => (
             <div key={k} style={{ textAlign: "center" }}>
               <div style={{ fontSize: "0.5rem", color: "#4d4635", letterSpacing: "0.15em", textTransform: "uppercase", fontWeight: 700 }}>{k}</div>
               <div style={{ fontSize: "0.75rem", color: "#f2ca50", fontWeight: 800 }}>{v}</div>
@@ -180,16 +180,16 @@ export default function SanctumPage() {
           </p>
           <p style={{ fontSize: "0.75rem", lineHeight: 1.65, color: "#99907c" }}>{meta.desc}</p>
           <div style={{ display: "flex", gap: "1.5rem", marginTop: "1rem", paddingTop: "0.8rem", borderTop: "1px solid rgba(242,202,80,0.08)" }}>
-            <div><p style={{ fontSize: "1.1rem", fontWeight: 900, color: "#f2ca50" }}>{meta.ratio}</p><p style={{ fontSize: "0.52rem", color: "#4d4635", letterSpacing: "0.14em", textTransform: "uppercase" }}>Ratio</p></div>
-            <div><p style={{ fontSize: "1.1rem", fontWeight: 900, color: "#f2ca50" }}>{meta.skew}</p><p style={{ fontSize: "0.52rem", color: "#4d4635", letterSpacing: "0.14em", textTransform: "uppercase" }}>Skew</p></div>
-            <div><p style={{ fontSize: "1.1rem", fontWeight: 900, color: "#f2ca50" }}>{selectedLetter}</p><p style={{ fontSize: "0.52rem", color: "#4d4635", letterSpacing: "0.14em", textTransform: "uppercase" }}>Glyph</p></div>
+            <div><p style={{ fontSize: "1.1rem", fontWeight: 900, color: "#f2ca50" }}>{meta.ratio}</p><p style={{ fontSize: "0.52rem", color: "#4d4635", letterSpacing: "0.14em" }}>יחס</p></div>
+            <div><p style={{ fontSize: "1.1rem", fontWeight: 900, color: "#f2ca50" }}>{meta.skew}</p><p style={{ fontSize: "0.52rem", color: "#4d4635", letterSpacing: "0.14em" }}>סטייה</p></div>
+            <div><p style={{ fontSize: "1.1rem", fontWeight: 900, color: "#f2ca50" }}>{selectedLetter}</p><p style={{ fontSize: "0.52rem", color: "#4d4635", letterSpacing: "0.14em" }}>גליף</p></div>
           </div>
         </div>
 
         {/* Coordinate decoration */}
         <div style={{ marginTop: "1rem", display: "flex", gap: "1.5rem" }}>
-          <p style={{ fontSize: "0.58rem", fontFamily: "monospace", color: "#4d4635", letterSpacing: "0.08em" }}>COORD: 32.0853° N</p>
-          <p style={{ fontSize: "0.58rem", fontFamily: "monospace", color: "#4d4635", letterSpacing: "0.08em" }}>VERSION: ARCHIVE_V.03</p>
+          <p style={{ fontSize: "0.58rem", fontFamily: "monospace", color: "#4d4635", letterSpacing: "0.08em" }}>קואורד: 32.0853° צ</p>
+          <p style={{ fontSize: "0.58rem", fontFamily: "monospace", color: "#4d4635", letterSpacing: "0.08em" }}>גרסה: ארכיון_3</p>
         </div>
       </div>
 
