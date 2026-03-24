@@ -1,514 +1,236 @@
 "use client";
 
-import TopBar from "../components/TopBar";
+import { useState } from "react";
+import Link from "next/link";
 import BottomNav from "../components/BottomNav";
 
-export default function GalleryPage() {
-  return (
-    <div
-      dir="rtl"
-      lang="he"
-      style={{
-        background: "#131313",
-        color: "#e5e2e1",
-        fontFamily: "'Space Grotesk', sans-serif",
-        minHeight: "100vh",
-        overflowX: "hidden",
-        position: "relative",
-      }}
-    >
-      <TopBar section="The Gallery" />
+const fonts = [
+  {
+    id: 1,
+    tag: "מסורתי",
+    tagNum: "01",
+    name: "פרנק-ריהל",
+    latin: "Frank-Rühl",
+    year: "1908",
+    designer: "רפאל פרנק",
+    origin: "לייפציג, גרמניה",
+    letter: "א",
+    desc: "עמוד השדרה של הדפוס העברי. פונט שנוצר ב-1908 ומאז מגדיר את הקריאות העברית בספרות ובעיתונות.",
+    category: "מסורתי",
+  },
+  {
+    id: 2,
+    tag: "מודרני",
+    tagNum: "02",
+    name: "חיים",
+    latin: "Haim",
+    year: "1947",
+    designer: "חיים בר",
+    origin: "תל-אביב",
+    letter: "ח",
+    desc: "הבאוהאוס העברי. צורות גיאומטריות נוקשות שהגדירו את העיר העברית הראשונה.",
+    category: "מודרני",
+  },
+  {
+    id: 3,
+    tag: "אלגנטי",
+    tagNum: "03",
+    name: "דוד",
+    latin: "David",
+    year: "1954",
+    designer: "טוביה פרידמן",
+    origin: "ישראל",
+    letter: "ד",
+    desc: "השילוב המושלם בין הקליגרפיה הקלאסית למודרניזם המוקדם. אלגנטי, קריא, נצחי.",
+    category: "מסורתי",
+  },
+  {
+    id: 4,
+    tag: "ניסיוני",
+    tagNum: "04",
+    name: "נרקיס בלוק",
+    latin: "Narkiss Block",
+    year: "1968",
+    designer: "צבי נרקיס",
+    origin: "ישראל",
+    letter: "נ",
+    desc: "צבי נרקיס יצר שפה חזותית חדשה. נרקיס בלוק הפך לסמל הטיפוגרפי של מדינת ישראל.",
+    category: "מודרני",
+  },
+  {
+    id: 5,
+    tag: "אוונגרד",
+    tagNum: "05",
+    name: "הדסה",
+    latin: "Hadassah",
+    year: "1958",
+    designer: "אנרי פרידלנדר",
+    origin: "ירושלים",
+    letter: "ה",
+    desc: "שלושים שנות עבודה — ולב ספרדי. הדסה משלב מסורת קלאסית עם ניקיון מודרניסטי. זכה בפרס גוטנברג.",
+    category: "ניסיוני",
+  },
+  {
+    id: 6,
+    tag: "ניסיוני",
+    tagNum: "06",
+    name: "הייבריד",
+    latin: "Hybrid",
+    year: "2002",
+    designer: "עודד עזר",
+    origin: "תל-אביב",
+    letter: "ע",
+    desc: "האות כיצור חי. עבודות עודד עזר מוצגות ב-MoMA ומאתגרות את גבולות הטיפוגרפיה.",
+    category: "ניסיוני",
+  },
+];
 
-      {/* Background glyph ה */}
-      <div
-        aria-hidden
-        style={{
-          position: "fixed",
-          top: "-8vh",
-          left: "-4vw",
-          fontSize: "55vw",
-          lineHeight: 1,
-          WebkitTextStroke: "1px rgba(242,202,80,0.04)",
-          color: "transparent",
-          fontFamily: "'Space Grotesk', sans-serif",
-          fontWeight: 900,
-          userSelect: "none",
-          pointerEvents: "none",
-          zIndex: 0,
-          opacity: 0.04,
-        }}
-      >
-        ה
+const categories = ["הכל", "מסורתי", "מודרני", "ניסיוני"];
+
+export default function GalleryPage() {
+  const [activeFilter, setActiveFilter] = useState("הכל");
+  const [search, setSearch] = useState("");
+
+  const filtered = fonts.filter((f) => {
+    const matchCat = activeFilter === "הכל" || f.category === activeFilter;
+    const matchSearch = !search || f.name.includes(search) || f.latin.toLowerCase().includes(search.toLowerCase());
+    return matchCat && matchSearch;
+  });
+
+  return (
+    <div dir="rtl" lang="he" style={{ background: "#131313", color: "#e5e2e1", fontFamily: "'Space Grotesk',sans-serif", minHeight: "100dvh" }}>
+
+      {/* ═══ FIXED HEADER ═══ */}
+      <header style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, height: "56px", background: "#0e0e0e", borderBottom: "1px solid rgba(242,202,80,0.08)", display: "flex", alignItems: "center", justifyContent: "space-between", padding: "0 1.25rem" }}>
+        <Link href="/" style={{ fontWeight: 900, fontSize: "1.4rem", color: "#f2ca50", letterSpacing: "-0.02em", textDecoration: "none" }}>אֶלֶף</Link>
+        <span style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.2em", color: "#4d4635", textTransform: "uppercase" }}>THE GALLERY</span>
+      </header>
+
+      {/* ═══ HERO ═══ */}
+      <section style={{ paddingTop: "80px", padding: "80px 1.5rem 0" }}>
+        <p style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.28em", textTransform: "uppercase", color: "#4d4635", marginBottom: "1rem" }}>
+          אוסף פונטים עבריים
+        </p>
+        <h1 style={{ fontSize: "clamp(2.8rem,10vw,7rem)", fontWeight: 900, lineHeight: 0.92, marginBottom: "1.25rem", letterSpacing: "-0.02em" }}>
+          היכל{" "}
+          <span style={{ color: "#f2ca50" }}>הפונטים</span>
+        </h1>
+        <p style={{ maxWidth: "480px", fontSize: "0.88rem", lineHeight: 1.85, color: "#d0c5af", marginBottom: "2rem" }}>
+          תערוכה דיגיטלית של פונטים עבריים מרכזיים — מ-1908 ועד ימינו.
+        </p>
+      </section>
+
+      {/* ═══ SEARCH + FILTERS ═══ */}
+      <div style={{ padding: "0 1.5rem 1.5rem", position: "sticky", top: "56px", zIndex: 40, background: "#131313", paddingTop: "1rem", borderBottom: "1px solid rgba(242,202,80,0.06)" }}>
+        {/* Search */}
+        <div style={{ position: "relative", marginBottom: "0.9rem" }}>
+          <span className="material-symbols-outlined" style={{ position: "absolute", top: "50%", right: "0", transform: "translateY(-50%)", fontSize: "18px", color: "#4d4635", direction: "ltr" }}>search</span>
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="חפש פונט..."
+            style={{ width: "100%", background: "transparent", border: "none", borderBottom: "1px solid rgba(77,70,53,0.5)", padding: "0.5rem 1.5rem 0.5rem 0", fontSize: "0.9rem", color: "#e5e2e1", fontFamily: "'Space Grotesk',sans-serif", outline: "none", caretColor: "#f2ca50", boxSizing: "border-box" }}
+          />
+        </div>
+        {/* Filters */}
+        <div style={{ display: "flex", gap: "0.5rem", overflowX: "auto", paddingBottom: "0.2rem" }}>
+          {categories.map((c) => (
+            <button key={c} onClick={() => setActiveFilter(c)} style={{ padding: "0.35rem 1rem", fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.1em", fontFamily: "'Space Grotesk',sans-serif", background: activeFilter === c ? "#f2ca50" : "transparent", color: activeFilter === c ? "#1a1200" : "#4d4635", border: activeFilter === c ? "none" : "1px solid rgba(77,70,53,0.5)", cursor: "pointer", whiteSpace: "nowrap", transition: "all 0.15s", flexShrink: 0 }}>
+              {c}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div style={{ position: "relative", zIndex: 1, paddingTop: "6rem", paddingBottom: "8rem" }}>
-
-        {/* Hero */}
-        <section style={{ padding: "3rem 2.5rem 4rem", maxWidth: "1400px", margin: "0 auto" }}>
-          <p
-            style={{
-              fontSize: "0.68rem",
-              fontWeight: 700,
-              letterSpacing: "0.28em",
-              textTransform: "uppercase",
-              color: "#99907c",
-              marginBottom: "1.5rem",
-            }}
-          >
-            אוסף פונטים עבריים
-          </p>
-
-          <h2
-            style={{
-              fontSize: "clamp(3rem,10vw,8rem)",
-              fontWeight: 900,
-              lineHeight: 0.9,
-              marginBottom: "2rem",
-              color: "#e5e2e1",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            היכל{" "}
-            <span style={{ color: "#f2ca50" }}>הפונטים</span>
-          </h2>
-
-          <p
-            style={{
-              maxWidth: "520px",
-              fontSize: "0.92rem",
-              lineHeight: 1.85,
-              color: "#d0c5af",
-            }}
-          >
-            מבחר קורטוראלי של הפונטים העבריים המשפיעים ביותר בהיסטוריה — מהדפוס המסורתי ועד לניסויים האוונגרדיים של ימינו.
-          </p>
-        </section>
-
-        {/* Search + filters */}
-        <div
-          style={{
-            padding: "0 2.5rem 3rem",
-            maxWidth: "1400px",
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: "column",
-            gap: "1.5rem",
-          }}
-        >
-          {/* Search bar */}
-          <div style={{ position: "relative", maxWidth: "420px" }}>
-            <span
-              className="material-symbols-outlined"
-              style={{
-                position: "absolute",
-                top: "50%",
-                right: "0",
-                transform: "translateY(-50%)",
-                fontSize: "18px",
-                color: "#99907c",
-                direction: "ltr",
-              }}
-            >
-              search
-            </span>
-            <input
-              type="text"
-              placeholder="חפש פונט..."
-              style={{
-                width: "100%",
-                background: "transparent",
-                border: "none",
-                borderBottom: "1px solid rgba(153,144,124,0.4)",
-                padding: "0.7rem 2rem 0.7rem 0",
-                fontSize: "0.9rem",
-                color: "#e5e2e1",
-                fontFamily: "'Space Grotesk', sans-serif",
-                outline: "none",
-              }}
-            />
+      {/* ═══ FONT CARDS ═══ */}
+      <main style={{ padding: "1.5rem 1.5rem 7rem" }}>
+        {filtered.length === 0 && (
+          <div style={{ textAlign: "center", padding: "4rem 0", color: "#4d4635" }}>
+            <span style={{ fontSize: "4rem", fontWeight: 900, WebkitTextStroke: "1px rgba(242,202,80,0.2)", color: "transparent" }}>?</span>
+            <p style={{ marginTop: "1rem", fontSize: "0.85rem" }}>לא נמצאו פונטים</p>
           </div>
+        )}
 
-          {/* Filter buttons */}
-          <div style={{ display: "flex", gap: "0.6rem", flexWrap: "wrap" }}>
-            {[
-              { label: "הכל", active: true },
-              { label: "מסורתי", active: false },
-              { label: "מודרני", active: false },
-              { label: "ניסיוני", active: false },
-            ].map((f) => (
-              <button
-                key={f.label}
-                style={{
-                  padding: "0.4rem 1.1rem",
-                  fontSize: "0.75rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.1em",
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  background: f.active ? "#f2ca50" : "transparent",
-                  color: f.active ? "#1a1200" : "#99907c",
-                  border: f.active ? "none" : "1px solid rgba(153,144,124,0.3)",
-                  cursor: "pointer",
-                  transition: "all 0.18s",
-                }}
-              >
-                {f.label}
-              </button>
-            ))}
-          </div>
-        </div>
+        {/* Featured: first card big */}
+        {filtered.length > 0 && (
+          <div style={{ display: "flex", flexDirection: "column", gap: "2px", background: "rgba(242,202,80,0.03)" }}>
 
-        {/* Bento Grid */}
-        <div
-          style={{
-            padding: "0 2.5rem",
-            maxWidth: "1400px",
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(12, 1fr)",
-            gap: "2px",
-            background: "rgba(242,202,80,0.04)",
-          }}
-        >
-
-          {/* Card 1: Frank-Rühl — col-span 8 */}
-          <div
-            style={{
-              gridColumn: "span 8",
-              background: "#1c1b1b",
-              padding: "3rem",
-              position: "relative",
-              overflow: "hidden",
-              minHeight: "340px",
-            }}
-          >
-            {/* Watermark */}
-            <span
-              aria-hidden
-              style={{
-                position: "absolute",
-                bottom: "-2rem",
-                left: "-1rem",
-                fontSize: "18rem",
-                fontWeight: 900,
-                WebkitTextStroke: "1px rgba(242,202,80,0.06)",
-                color: "transparent",
-                lineHeight: 1,
-                fontFamily: "serif",
-                userSelect: "none",
-                pointerEvents: "none",
-              }}
-            >
-              א
-            </span>
-
-            <div style={{ position: "relative", zIndex: 1 }}>
-              <p
-                style={{
-                  fontSize: "0.65rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.22em",
-                  color: "#f2ca50",
-                  marginBottom: "1.5rem",
-                  textTransform: "uppercase",
-                }}
-              >
-                01 / מסורתי
-              </p>
-
-              <h3
-                style={{
-                  fontSize: "clamp(2rem,5vw,4rem)",
-                  fontWeight: 900,
-                  color: "#e5e2e1",
-                  marginBottom: "1rem",
-                  lineHeight: 1,
-                }}
-              >
-                פרנק-ריהל
-              </h3>
-
-              <p
-                style={{
-                  maxWidth: "380px",
-                  fontSize: "0.88rem",
-                  lineHeight: 1.8,
-                  color: "#d0c5af",
-                  marginBottom: "2.5rem",
-                }}
-              >
-                עוצב ב-1908 בלייפציג על ידי רפאל פרנק. הפונט הדפוסי העברי הנפוץ ביותר בעולם — משמש בספרי תנ"ך, ספרות ומסמכים רשמיים למשך יותר ממאה שנה.
-              </p>
-
-              <button
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.5rem",
-                  padding: "0.7rem 1.6rem",
-                  background: "transparent",
-                  border: "1px solid rgba(242,202,80,0.35)",
-                  color: "#f2ca50",
-                  fontSize: "0.78rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.12em",
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  cursor: "pointer",
-                }}
-              >
-                חקור את האות
-                <span className="material-symbols-outlined" style={{ fontSize: "16px", direction: "ltr" }}>
-                  arrow_back
-                </span>
-              </button>
-            </div>
-          </div>
-
-          {/* Card 2: Chaim — col-span 4 */}
-          <div
-            style={{
-              gridColumn: "span 4",
-              background: "#353534",
-              padding: "2.5rem 2rem",
-              position: "relative",
-              overflow: "hidden",
-              minHeight: "340px",
-            }}
-          >
-            <p
-              style={{
-                fontSize: "0.65rem",
-                fontWeight: 700,
-                letterSpacing: "0.22em",
-                color: "#f2ca50",
-                marginBottom: "1.2rem",
-                textTransform: "uppercase",
-              }}
-            >
-              02 / מודרני
-            </p>
-
-            <h3
-              style={{
-                fontSize: "2.4rem",
-                fontWeight: 900,
-                color: "#e5e2e1",
-                marginBottom: "0.8rem",
-                lineHeight: 1,
-              }}
-            >
-              חיים
-            </h3>
-
-            <p
-              style={{
-                fontSize: "0.83rem",
-                lineHeight: 1.75,
-                color: "#d0c5af",
-                marginBottom: "1.5rem",
-              }}
-            >
-              עיצוב עברי בהשראת הבאוהאוס — צורות גיאומטריות נקיות עם אופי לאומי מודרני.
-            </p>
-
-            {/* Big letter */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: "-1.5rem",
-                left: "0.5rem",
-                fontSize: "10rem",
-                fontWeight: 900,
-                color: "#f2ca50",
-                lineHeight: 1,
-                fontFamily: "'Space Grotesk', sans-serif",
-                opacity: 0.12,
-                userSelect: "none",
-                pointerEvents: "none",
-              }}
-            >
-              ח
-            </div>
-          </div>
-
-          {/* Card 3: David — col-span 4 */}
-          <div
-            style={{
-              gridColumn: "span 4",
-              background: "#201f1f",
-              padding: "2.5rem 2rem",
-              position: "relative",
-              overflow: "hidden",
-              borderRight: "4px solid #f2ca50",
-              minHeight: "280px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <p
-              style={{
-                fontSize: "0.65rem",
-                fontWeight: 700,
-                letterSpacing: "0.22em",
-                color: "#99907c",
-                marginBottom: "1rem",
-                textTransform: "uppercase",
-                alignSelf: "flex-start",
-              }}
-            >
-              03 / אלגנטי
-            </p>
-
-            {/* Center glyph-mask letter */}
-            <div
-              style={{
-                fontSize: "10rem",
-                fontWeight: 900,
-                WebkitTextStroke: "1.5px rgba(242,202,80,0.5)",
-                color: "transparent",
-                lineHeight: 1,
-                fontFamily: "'Space Grotesk', sans-serif",
-                userSelect: "none",
-              }}
-            >
-              ד
+            {/* Card 0 — Featured hero card */}
+            <div style={{ background: "#1c1b1b", padding: "2rem 1.5rem", position: "relative", overflow: "hidden", minHeight: "260px" }}>
+              <div aria-hidden style={{ position: "absolute", bottom: "-1rem", left: "-0.5rem", fontSize: "12rem", fontWeight: 900, WebkitTextStroke: "1px rgba(242,202,80,0.07)", color: "transparent", lineHeight: 1, fontFamily: "'Space Grotesk',sans-serif", userSelect: "none", pointerEvents: "none" }}>
+                {filtered[0].letter}
+              </div>
+              <div style={{ position: "relative", zIndex: 1 }}>
+                <p style={{ fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.22em", color: "#f2ca50", marginBottom: "1.2rem", textTransform: "uppercase" }}>
+                  {filtered[0].tagNum} / {filtered[0].tag}
+                </p>
+                <h2 style={{ fontSize: "clamp(2.2rem,8vw,5rem)", fontWeight: 900, color: "#e5e2e1", marginBottom: "0.6rem", lineHeight: 1, letterSpacing: "-0.02em" }}>
+                  {filtered[0].name}
+                </h2>
+                <p style={{ fontSize: "0.72rem", color: "#4d4635", marginBottom: "1.2rem", letterSpacing: "0.1em" }}>
+                  {filtered[0].latin} · {filtered[0].year} · {filtered[0].designer}
+                </p>
+                <p style={{ fontSize: "0.85rem", lineHeight: 1.8, color: "#d0c5af", maxWidth: "420px", marginBottom: "1.5rem" }}>
+                  {filtered[0].desc}
+                </p>
+                <Link href="/sanctum" style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem", padding: "0.6rem 1.4rem", border: "1px solid rgba(242,202,80,0.3)", color: "#f2ca50", fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.12em", textDecoration: "none", transition: "all 0.2s" }}>
+                  חקור את האות
+                  <span className="material-symbols-outlined" style={{ fontSize: "14px", direction: "ltr" }}>arrow_back</span>
+                </Link>
+              </div>
             </div>
 
-            <h3
-              style={{
-                fontSize: "1.8rem",
-                fontWeight: 900,
-                color: "#e5e2e1",
-                marginTop: "0.8rem",
-                lineHeight: 1,
-              }}
-            >
-              דוד
-            </h3>
-          </div>
+            {/* Cards 1..n — 2-column on mobile for the rest */}
+            {filtered.length > 1 && (
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "2px", background: "rgba(242,202,80,0.03)" }}>
+                {filtered.slice(1).map((font) => (
+                  <div key={font.id} style={{ background: "#201f1f", padding: "1.4rem 1.2rem", position: "relative", overflow: "hidden", minHeight: "180px" }}>
+                    <div aria-hidden style={{ position: "absolute", bottom: "-0.5rem", left: "0.5rem", fontSize: "6rem", fontWeight: 900, WebkitTextStroke: "1px rgba(242,202,80,0.06)", color: "transparent", lineHeight: 1, userSelect: "none", pointerEvents: "none" }}>
+                      {font.letter}
+                    </div>
+                    <div style={{ position: "relative", zIndex: 1 }}>
+                      <p style={{ fontSize: "0.55rem", fontWeight: 700, letterSpacing: "0.2em", color: "#f2ca50", marginBottom: "0.8rem", textTransform: "uppercase" }}>
+                        {font.tagNum} / {font.tag}
+                      </p>
+                      <h3 style={{ fontSize: "clamp(1.2rem,4vw,1.8rem)", fontWeight: 900, color: "#e5e2e1", marginBottom: "0.3rem", lineHeight: 1 }}>
+                        {font.name}
+                      </h3>
+                      <p style={{ fontSize: "0.65rem", color: "#4d4635", marginBottom: "0.7rem" }}>{font.year}</p>
+                      <p style={{ fontSize: "0.75rem", lineHeight: 1.7, color: "#d0c5af" }}>
+                        {font.desc.slice(0, 70)}…
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
 
-          {/* Card 4: Narkiss — col-span 8 */}
-          <div
-            style={{
-              gridColumn: "span 8",
-              background: "#2a2a2a",
-              padding: "2.5rem 3rem",
-              position: "relative",
-              overflow: "hidden",
-              minHeight: "280px",
-              display: "grid",
-              gridTemplateColumns: "1fr auto",
-              gap: "2rem",
-              alignItems: "center",
-            }}
-          >
-            <div>
-              <p
-                style={{
-                  fontSize: "0.65rem",
-                  fontWeight: 700,
-                  letterSpacing: "0.22em",
-                  color: "#f2ca50",
-                  marginBottom: "1.2rem",
-                  textTransform: "uppercase",
-                }}
-              >
-                04 / ניסיוני
-              </p>
-
-              <h3
-                style={{
-                  fontSize: "clamp(1.8rem,3.5vw,3rem)",
-                  fontWeight: 900,
-                  color: "#e5e2e1",
-                  marginBottom: "1rem",
-                  lineHeight: 1,
-                }}
-              >
-                נרקיס
-              </h3>
-
-              <p
-                style={{
-                  fontSize: "0.86rem",
-                  lineHeight: 1.8,
-                  color: "#d0c5af",
-                  maxWidth: "360px",
-                }}
-              >
-                צבי נרקיס יצר פונט שמשלב אקספרסיביות אישית עם קריאות. נרקיס בלוק הפך לסמל של הטיפוגרפיה הישראלית המודרנית.
-              </p>
-            </div>
-
-            {/* Letter tiles */}
-            <div style={{ display: "flex", gap: "0.5rem" }}>
-              {["נ", "ר", "ק"].map((l) => (
-                <div
-                  key={l}
-                  style={{
-                    width: "60px",
-                    height: "60px",
-                    background: "#131313",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "1.8rem",
-                    fontWeight: 900,
-                    color: "#f2ca50",
-                    fontFamily: "'Space Grotesk', sans-serif",
-                  }}
-                >
-                  {l}
-                </div>
+            {/* Letter showcase row */}
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "2px", background: "rgba(242,202,80,0.03)", marginTop: "2px" }}>
+              {["ל", "פ", "צ", "ת"].map((letter) => (
+                <LetterTile key={letter} letter={letter} />
               ))}
             </div>
           </div>
-
-          {/* Card 5: Letter grid row — col-span 12 */}
-          <div
-            style={{
-              gridColumn: "span 12",
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "2px",
-              background: "rgba(242,202,80,0.04)",
-            }}
-          >
-            {["ל", "פ", "צ", "ת"].map((letter) => (
-              <div
-                key={letter}
-                style={{
-                  background: "#1c1b1b",
-                  aspectRatio: "1",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: "clamp(3rem,6vw,6rem)",
-                  fontWeight: 900,
-                  color: "#e5e2e1",
-                  fontFamily: "'Space Grotesk', sans-serif",
-                  cursor: "pointer",
-                  transition: "background 0.2s, color 0.2s",
-                  maxHeight: "160px",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.background = "#f2ca50";
-                  (e.currentTarget as HTMLDivElement).style.color = "#1a1200";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLDivElement).style.background = "#1c1b1b";
-                  (e.currentTarget as HTMLDivElement).style.color = "#e5e2e1";
-                }}
-              >
-                {letter}
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+        )}
+      </main>
 
       <BottomNav />
+    </div>
+  );
+}
+
+function LetterTile({ letter }: { letter: string }) {
+  const [hover, setHover] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      style={{ aspectRatio: "1", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: hover ? "#f2ca50" : "#1c1b1b", cursor: "pointer", transition: "background 0.2s", maxHeight: "130px" }}
+    >
+      <span style={{ fontSize: "clamp(2rem,6vw,4rem)", fontWeight: 900, color: hover ? "#1a1200" : "#e5e2e1", fontFamily: "'Space Grotesk',sans-serif", transition: "color 0.2s" }}>{letter}</span>
+      <span style={{ fontSize: "0.52rem", letterSpacing: "0.18em", fontWeight: 700, color: hover ? "#1a1200" : "#4d4635", marginTop: "0.3rem", transition: "color 0.2s" }}>GLYPH</span>
     </div>
   );
 }

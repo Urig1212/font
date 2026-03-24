@@ -15,21 +15,45 @@ export default function BottomNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full flex justify-around items-center border-t border-[#f2ca50]/10 bg-[#131313]/80 backdrop-blur-xl z-50 shadow-[0_-4px_40px_rgba(242,202,80,0.05)]">
+    <nav style={{
+      position: "fixed",
+      bottom: 0,
+      left: 0,
+      right: 0,
+      zIndex: 200,
+      display: "flex",
+      justifyContent: "space-around",
+      alignItems: "stretch",
+      background: "rgba(14,14,14,0.9)",
+      backdropFilter: "blur(20px)",
+      WebkitBackdropFilter: "blur(20px)",
+      borderTop: "1px solid rgba(242,202,80,0.08)",
+      height: "60px",
+    }}>
       {navItems.map((item) => {
         const isActive = pathname === item.href;
         return (
           <Link
             key={item.href}
             href={item.href}
-            className={`flex flex-col items-center justify-center px-4 py-3 transition-all duration-300 ${
-              isActive
-                ? "bg-gradient-to-b from-[#f2ca50] to-[#d4af37] text-[#3c2f00]"
-                : "text-[#f2ca50]/50 hover:text-[#f2ca50] hover:bg-white/5"
-            }`}
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "2px",
+              textDecoration: "none",
+              background: isActive ? "linear-gradient(to bottom, rgba(242,202,80,0.15), rgba(242,202,80,0.05))" : "transparent",
+              borderTop: isActive ? "2px solid #f2ca50" : "2px solid transparent",
+              color: isActive ? "#f2ca50" : "rgba(242,202,80,0.35)",
+              transition: "all 0.15s",
+            }}
           >
-            <span className="material-symbols-outlined text-[20px]">{item.icon}</span>
-            <span className="font-black text-[10px] mt-1 leading-none" style={{ fontFamily: "'Space Grotesk'" }}>
+            <span className="material-symbols-outlined" style={{ fontSize: "20px", direction: "ltr" }}>
+              {item.icon}
+            </span>
+            <span style={{ fontFamily: "'Space Grotesk',sans-serif", fontWeight: 800, fontSize: "9px", letterSpacing: "0.05em" }}>
               {item.label}
             </span>
           </Link>

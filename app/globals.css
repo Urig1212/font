@@ -91,3 +91,18 @@ input[type=range]:focus {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
+
+/* Lab page 3-col grid on desktop */
+@media (min-width: 1024px) {
+  .lg\:grid-cols-\[300px_1fr_260px\] {
+    grid-template-columns: 300px 1fr 260px !important;
+  }
+  .lg\:block { display: block !important; }
+  .lg\:hidden { display: none !important; }
+  .lg\:flex { display: flex !important; }
+  .lg\:min-h-0 { min-height: 0 !important; }
+}
+
+/* ensure hidden/block on mobile tabs */
+.hidden { display: none; }
+.block { display: block; }
